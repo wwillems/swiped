@@ -1,0 +1,13 @@
+<section class="section container-fluid" ng-controller="SettingsController">
+ 
+  Level:
+  <span  class="nullable">
+    <select ng-model="myLevel" ng-options="level.name for level in levels" ng-change="handleChange(myLevel)">
+      <option value="">-- choose level --</option>
+    </select>
+    <span>
+    <br/><br/>Currently selected: {{myLevel}}
+    </span>
+  </span><br/>
+
+</section>
