@@ -3,7 +3,7 @@ angular.module('Swiped.controllers.Main', [])
 .factory('sharedService', function($rootScope) {
 	var sharedService = {};
 
-	sharedService.level = "{\"name\":\"4 x 4 tiles\",\"rowWidth\":4}";
+	sharedService.level = "{\"name\":\"3 x 3 tiles\",\"rowWidth\":3}";
 
 	sharedService.setLevel = function(level) {
 		this.level = level;
@@ -12,34 +12,24 @@ angular.module('Swiped.controllers.Main', [])
 	return sharedService;
 })
 
-.controller('MainCtrl', function ($scope, StoreService, $cookieStore) {
-    $scope.draggableObjects = [
-	    {name: '1'},
-	    {name: '2'},
-	    {name: '3'},
-	    {name: '4'},
-	    {name: '5'},
-	    {name: '6'},
-	    {name: '7'},
-	    {name: '8'},
-	    {name: '9'},
-	    {name: '10'},
-	    {name: '11'},
-	    {name: '12'},
-	    {name: '13'},
-	    {name: '14'},
-	    {name: '15'},
-	    {name: '16'},
-	    {name: '17'},
-	    {name: '18'},
-	    {name: '19'},
-	    {name: '20'},
-	    {name: '21'},
-	    {name: '22'},
-	    {name: '23'},
-	    {name: '24'},                    
-	    {name: 'L'}
-    ];
+.controller('MainCtrl', function ($scope, StoreService, $cookieStore, sharedService) {
+
+    $scope.draggableObjects = [];
+
+    if (sharedService.level.rowWidth == undefined) {
+		$scope.levels = 3;
+    } else {
+    	$scope.levels = sharedService.level.rowWidth;
+	}
+
+ 	var elements = ($scope.levels * $scope.levels) - 1;
+    for (var i = 1; i <= elements; i++) {
+		$scope.draggableObjects.push({name: i});
+    }
+
+    $scope.draggableObjects.push({name: 'L'});
+
+    //shuffle($scope.draggableObjects, $scope.levels);
 
     $scope.onDropComplete = function (index, obj, evt) {
         var otherObj = $scope.draggableObjects[index];
@@ -54,7 +44,7 @@ angular.module('Swiped.controllers.Main', [])
 
         if (otherObj.name == 'L') {
             if ((index + 1 == otherIndex) || (index - 1 == otherIndex) || 
-                (index + 5 == otherIndex) || (index - 5 == otherIndex)) {
+                (index + $scope.levels == otherIndex) || (index - $scope.levels == otherIndex)) {
                 $scope.draggableObjects[index] = obj;
                 $scope.draggableObjects[otherIndex] = otherObj;
             }
@@ -112,7 +102,7 @@ angular.module('Swiped.controllers.Main', [])
         document.getElementById("upload").disabled = true;
 
         console.log('>>> username: ' + $cookieStore.get('globals').currentUser.username);
-        StoreService.storeScore($scope.minutes * 60 + $scope.seconds, new Date, 5, $cookieStore.get('globals').currentUser.username, function(response) {
+        StoreService.storeScore($scope.minutes * 60 + $scope.seconds, new Date, $scope.levels, $cookieStore.get('globals').currentUser.username, function(response) {
             if(response.success) {
             	console.log('callback success');
             } else {
@@ -194,29 +184,13 @@ function ($scope, $rootScope, $location, AuthenticationService) {
 	
 })
 
-.controller('MainController', function($scope, sharedService){
-
-	$scope.rowWidth = sharedService.level.rowWidth;
-
-	$scope.images = initTiles($scope.rowWidth);
-
-	$scope.images = shuffle($scope.images, $scope.rowWidth);
-
-	$scope.tileClicked = function(index) {
-		console.log("tileClicked");
-	    $scope.images = reorder($scope.images, index, $scope.rowWidth);
-	};
-
-});
-
-function initTiles(rowWidth) {
-	var array = [];
-	for (var i = rowWidth * rowWidth - 1; i > 0; i--) {
-		array.push(i);
+.controller('MainController', function($scope, sharedService) {
+	if (sharedService.level.rowWidth == undefined) {
+		$scope.rowWidth = 3;
+	} else {
+		$scope.rowWidth = sharedService.level.rowWidth;
 	}
-	array.push("");
-	return array;
-}
+});
 
 /**
  * Randomize array element order in-place.
@@ -230,30 +204,4 @@ function shuffle(array, rowWidth) {
         array[j] = temp;
     }
     return array;
-}
-
-function reorder(array, source, rowWidth) {
-	if (array[source] != "") {
-		var emptyTile = getEmptyTile(array, source, rowWidth);
-		if (emptyTile != -1) {
-		    var temp = array[source];
-		    array[source] = array[emptyTile];
-		    array[emptyTile] = temp;
-		}	
-	}
-    return array;
-}
-
-function getEmptyTile(array, source, rowWidth) {
-	var emptyTile = -1;
-	if (array[source - 1] === "") {
-		emptyTile = source - 1;
-	} else if (array[source + 1] === "") {
-		emptyTile = source + 1;
-	} else if (array[source - rowWidth] === "") {
-		emptyTile = source - rowWidth;
-	} else if (array[source + rowWidth] === "") {
-		emptyTile = source + rowWidth;
-	}
-	return emptyTile;
 }

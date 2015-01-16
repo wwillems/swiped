@@ -1,6 +1,6 @@
 <section class="section container-fluid" ng-controller="ScoreController">
     <span ng-repeat='score in highscores'>
-    {{score.user}} {{score.date}} {{score.level}} {{score.timeInSeconds}}
+    {{score.date | date:'yyyy-MM-dd HH:mm'}} {{score.level}} {{score.timeInSeconds | numberFixedLen:4}} {{score.user}}  
     <br>
     </span>
 

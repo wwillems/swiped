@@ -1,13 +1,8 @@
 <section class="section container-fluid" ng-controller="MainCtrl">
  
-<!--     <span ng-repeat='image in images'>
-      <span ng-show="(($index > 0) && (($index % rowWidth) == 0))"><br></span>
-      <img ng-click="tileClicked($index)" style="-webkit-user-drag: none;" ng-swipe-right="tileClicked($index)" ng-swipe-left="tileClicked($index)" ng-src='http://placehold.it/100x100&text={{image}}'/>
-    </span> -->
-
-	<div class="row text-center" ng-controller="MainCtrl" width="500px">
-	    <ul class="draglist">
-	        <li ng-repeat="obj in draggableObjects" ng-drop="true" ng-drop-success="onDropComplete($index, $data,$event)">
+	<div class="row text-center" ng-controller="MainCtrl" >
+	    <ul ng-class="{3:'draglist3', 4:'draglist4', 5:'draglist5', 6:'draglist6'}[levels]">
+	        <li ng-repeat="obj in draggableObjects" ng-drop="true" ng-drop-success="onDropComplete($index, $data, $event)">
 	            <div ng-drag="true" class="allSides" id="{{obj.name}}" ng-drag-data="obj" ng-class="obj.name">
 	                {{obj.name}}
 	            </div>
