@@ -65,24 +65,17 @@ angular.module('Swiped', [
         var service = {};
 
         service.Login = function (username, password, callback) {
-
-            /* Dummy authentication for testing, uses $timeout to simulate api call
-             ----------------------------------------------*/
-            $timeout(function(){
-                var response = { success: username === 'test' && password === 'test' };
-                if(!response.success) {
-                    response.message = 'Username or password is incorrect';
-                }
-                callback(response);
-            }, 1000);
-
-
-            /* Use this for real authentication
-             ----------------------------------------------*/
-            //$http.post('/api/authenticate', { username: username, password: password })
-            //    .success(function (response) {
-            //        callback(response);
-            //    });
+                $http.get('https://score-store-api.herokuapp.com/api/users/' + username).
+                    success(function(data) {
+                        var response = {};
+                        if (data != null) {
+                            response.success = true;
+                        } else {
+                            response.success = false;
+                            response.message = 'Username or password is incorrect';
+                        }
+                        callback(response);
+                });
 
         };
  

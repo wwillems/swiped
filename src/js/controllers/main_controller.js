@@ -29,7 +29,7 @@ angular.module('Swiped.controllers.Main', [])
 
     $scope.draggableObjects.push({name: 'L'});
 
-    //shuffle($scope.draggableObjects, $scope.levels);
+    shuffle($scope.draggableObjects, $scope.levels);
 
     $scope.onDropComplete = function (index, obj, evt) {
         var otherObj = $scope.draggableObjects[index];
