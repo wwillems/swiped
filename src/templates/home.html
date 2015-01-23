@@ -10,11 +10,11 @@
 	    </ul>
 	</div>
 
-    <section id="clock-timer">    
-        <h4>
-            <timer id="timer" finish-callback="callbackTimer.finished()" interval="1000">{{minutes}} minute{{minutesS}}, {{seconds}} second{{secondsS}}</timer>
-        </h4>
-        <button id="stop" class="btn" ng-click="stopTimer('clock-timer')" type="button">Stop</button>
+    <section id="clock-timer" class="text-center">    
+        <p>
+            <timer id="timer" finish-callback="callbackTimer.finished()" interval="1000">{{minutes}} minute{{minutesS}} and {{seconds}} second{{secondsS}}</timer>
+        </p>
+        <button id="stop" class="btn" ng-click="stopTimer('clock-timer')" type="button">Pause</button>
         <button id="resume" disabled class="btn" ng-click="resumeTimer('clock-timer')" type="button">Resume</button>
         <button id="upload" disabled class="btn" ng-click="uploadScore()" type="button">Upload score</button>
     </section>

@@ -197,6 +197,7 @@ angular.module('Swiped', [
   }).
   when('/', {templateUrl: 'home.html'}).
   when('/settings', {templateUrl: 'settings.html'}).
+  when('/info', {templateUrl: 'info.html'}).
   when('/highscores', {templateUrl: 'highscores.html'});
 })
 
