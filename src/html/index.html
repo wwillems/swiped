@@ -10,7 +10,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
     <link rel="stylesheet" href="css/app.min.css" />
     <!-- <link rel="stylesheet" href="css/responsive.min.css" /> -->
-
     
     <script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js'></script>
 
@@ -94,7 +93,8 @@
         }
 
         #L {
-            background: blue;    
+            background: #f9f9f9;
+            color: #f9f9f9;    
         }
         .allSides { width:100px;height:100px; border: solid 1px #FFFFFF; border-radius: 6px; box-shadow: 0 0 6px rgba(255,255,255,0.6); -moz-box-shadow: 0 0 6px rgba(255,255,255,0.6); -webkit-box-shadow: 0 0 6px rgba(255,255,255,0.6); -o-box-shadow: 0 0 6px rgba(255,255,255,0.6); } 
         .signup-wrapper {
@@ -104,6 +104,13 @@
             margin-left: auto;
             margin-right: auto;
             background-color: #fff;
+        }
+        .bg {
+            background: #f9f9f9;
+        }
+        .register-link {
+            float: right;
+            margin-top: 10px;
         }
 
     </style>
@@ -139,7 +146,7 @@
       
       <!-- App Body -->
       <div class="app-body">
-        <ng-view class="app-content"></ng-view>
+        <ng-view class="app-content bg"></ng-view>
       </div>
 
     </div><!-- ~ .app -->
