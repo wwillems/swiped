@@ -1,7 +1,15 @@
 <section class="section container-fluid bg" ng-controller="ScoreController">
-    <span ng-repeat='score in highscores'>
-    {{score.date | date:'yyyy-MM-dd HH:mm'}} {{score.level}} {{score.timeInSeconds | numberFixedLen:4}} {{score.user}}  
-    <br>
-    </span>
+
+Search player: <input ng-model="searchText" class="search-text"><br>
+    
+<table id="searchTextResults" ng-table class="table">
+  <tr><th>Player</th><th>Date</th><th>Level</th><th>Score</th></tr>
+  <tr ng-repeat="score in highscores | filter:searchText" ng-class="{ cssScoreEven: (($index%2) == 0), cssScoreOdd: ($index%2) }">
+    <td data-title="'Player'">{{score.user}}</td>
+    <td data-title="'Date'">{{score.date | date:'yyyy-MM-dd HH:mm'}}</td>
+    <td data-title="'Level'">{{score.level}}</td>
+    <td data-title="'Score'">{{score.timeInSeconds | numberFixedLen:4}}</td>
+  </tr>
+</table>
 
 </section>

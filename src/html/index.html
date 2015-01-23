@@ -13,7 +13,11 @@
     
     <script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js'></script>
 
-   
+    <script data-require="ng-table@*" data-semver="0.3.0" src="http://bazalt-cms.com/assets/ng-table/0.3.0/ng-table.js"></script>
+    
+    <link data-require="ng-table@*" data-semver="0.3.0" rel="stylesheet" href="http://bazalt-cms.com/assets/ng-table/0.3.0/ng-table.css" />
+
+
     <!-- inject:js -->
     <script src="js/app.min.js"></script>
     <style>
@@ -107,12 +111,21 @@
         }
         .bg {
             background: #f9f9f9;
+            overflow: auto;
         }
         .register-link {
             float: right;
             margin-top: 10px;
         }
-
+        .search-text {
+            margin-bottom: 20px;
+        }
+        .cssScoreEven {
+            background-color: white;
+        }
+        .cssScoreOdd {
+            background-color: #F0F8F8;
+        }
     </style>
 
   </head>
@@ -146,7 +159,7 @@
       
       <!-- App Body -->
       <div class="app-body">
-        <ng-view class="app-content bg"></ng-view>
+        <ng-view class="app-content bg" autoscroll=""></ng-view>
       </div>
 
     </div><!-- ~ .app -->

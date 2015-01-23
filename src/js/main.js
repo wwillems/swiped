@@ -4,10 +4,10 @@ angular.module('ngMailChimp', ['ngMessages', 'ngAnimate'])
         function ($http) {
             var service = {};
 
-            service.storeUser = function (username, password) {
+            service.storeUser = function (username, email, password) {
                 console.log('in storeUser');
 
-                user = {'username': username, 'password': password}
+                user = {'username': username, 'email': email, 'password': password}
 
                 Object.toparams = function ObjecttoParams(obj) {
                     var p = [];
@@ -34,7 +34,7 @@ angular.module('ngMailChimp', ['ngMessages', 'ngAnimate'])
 
         var signup = function () {
             if( ctrl.signupForm.$valid) {
-                UserService.storeUser($scope.ctrl.newCustomer.userName, $scope.ctrl.newCustomer.userName, function(response) {
+                UserService.storeUser($scope.ctrl.newCustomer.userName, $scope.ctrl.newCustomer.email, $scope.ctrl.newCustomer.password, function(response) {
                     if(response.success) {
                         console.log('callback success');
                     } else {
