@@ -14,9 +14,9 @@
         <p>
             <timer id="timer" finish-callback="callbackTimer.finished()" interval="1000">{{minutes}} minute{{minutesS}} and {{seconds}} second{{secondsS}}</timer>
         </p>
-        <button id="stop" class="btn" ng-click="stopTimer('clock-timer')" type="button">Pause</button>
-        <button id="resume" disabled class="btn" ng-click="resumeTimer('clock-timer')" type="button">Resume</button>
-        <button id="upload" disabled class="btn" ng-click="uploadScore()" type="button">Upload score</button>
+        <button id="stop" class="btn btn-primary" ng-click="stopTimer('clock-timer')" type="button">Pause</button>
+        <button id="resume" disabled class="btn btn-primary" ng-click="resumeTimer('clock-timer')" type="button">Resume</button>
+        <button id="upload" disabled class="btn btn-primary" ng-click="uploadScore()" type="button">Upload score</button>
     </section>
     
 </section>
