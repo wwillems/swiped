@@ -163,11 +163,14 @@
             opacity: 0;
             margin-top: -20px;
         }
-
+        .text-center {
+            text-align: center;
+        }
 
     </style>
     </head>
     <body ng-controller="SignUpController as ctrl">
+        <h4 class="text-center">Swiped registration</h4>
         <div class="signup-wrapper">
             <div class="alert alert-success message-animation" role="alert" ng-if="ctrl.showSubmittedPrompt">
                 Your account was successfully created.
@@ -253,7 +256,7 @@
                     </div>
                 </div>
 
-                <button class="btn btn-primary" type="submit">Create My Account</button>
+                <button class="btn btn-primary" type="submit">Create player profile</button>
             </form>
         </div>
         <script src="js/app.min.js"></script>

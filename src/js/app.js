@@ -77,6 +77,7 @@ angular.module('Swiped', [
                         callback(response);
                 });
 
+
         };
  
         service.SetCredentials = function (username, password) {
