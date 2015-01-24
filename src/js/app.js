@@ -65,17 +65,34 @@ angular.module('Swiped', [
         var service = {};
 
         service.Login = function (username, password, callback) {
-                $http.get('https://score-store-api.herokuapp.com/api/users/' + username).
-                    success(function(data) {
-                        var response = {};
-                        if (data != null) {
-                            response.success = true;
-                        } else {
-                            response.success = false;
-                            response.message = 'Username or password is incorrect';
-                        }
-                        callback(response);
-                });
+            user = {'username': username, 'password': password}
+
+            Object.toparams = function ObjecttoParams(obj) {
+                var p = [];
+                for (var key in obj) {
+                    p.push(key + '=' + obj[key]);
+                }
+                return p.join('&');
+            };
+
+            $http({
+                method: 'POST',
+                url: 'https://score-store-api.herokuapp.com/api/users/' + username,
+                data: Object.toparams(user),
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).success(function(data) {
+                var response = {};
+                if (data != null) {
+                    response.success = data;
+                    if (data == false) {
+                        response.message = 'Username or password is incorrect';
+                    }
+                } else {
+                    response.success = false;
+                    response.message = 'Username or password is incorrect';
+                }
+                callback(response);
+            })
 
 
         };
